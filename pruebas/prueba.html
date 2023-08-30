@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+
+  .countdown {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+  }
+
+  .countdown span {
+    display: block;
+    background-color: rgba(255, 182, 193, 0.7); /* Color rosa con transparencia */
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .countdown label {
+    font-size: 0.8rem;
+    color: #668;
+  }
+</style>
+<title>Cuenta Regresiva</title>
+</head>
+<body>
+<div class="countdown" id="countdown">
+  <span id="days">0<label>días</label></span>
+  <span id="hours">0<label>horas</label></span>
+  <span id="minutes">0<label>minutos</label></span>
+  <span id="seconds">0<label>segundos</label></span>
+</div>
+
+<script>
+  // Fecha objetivo para la cuenta regresiva (año, mes - 1, día, hora, minuto, segundo)
+  const targetDate = new Date(2023, 8, 31, 23, 59, 59);
+
+  function updateCountdown() {
+    const now = new Date();
+    const timeLeft = targetDate - now;
+
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML = days + "<label>días</label>";
+    document.getElementById("hours").innerHTML = hours + "<label>horas</label>";
+    document.getElementById("minutes").innerHTML = minutes + "<label>minutos</label>";
+    document.getElementById("seconds").innerHTML = seconds + "<label>segundos</label>";
+  }
+
+  // Actualizar la cuenta regresiva cada segundo
+  setInterval(updateCountdown, 1000);
+
+  // Actualizar la cuenta regresiva de inmediato
+  updateCountdown();
+</script>
+</body>
+</html>
